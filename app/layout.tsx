@@ -47,7 +47,7 @@ export default async function RootLayout({
             <SidebarProvider>
               {user?.id && <AppSidebar user={user} />}
               <SidebarInset>
-                <div className="flex flex-1 flex-col gap-4">
+                <div className="flex flex-1 flex-col">
                   <OnboardingModal />
                   {user?.id && <ProjectSwitcher />}
                   {children}

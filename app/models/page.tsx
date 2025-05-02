@@ -58,13 +58,13 @@ export default function ModelsPage() {
   };
 
   return (
-    <div className="w-full">
-      <div className="space-y-2 p-4 ">
+    <div className="w-full p-8">
+      <div className="space-y-2 mb-4">
         <h1 className="text-3xl font-bold">AI Models</h1>
         <p className="text-muted-foreground">Manage and customize your AI models for cost tracking.</p>
 
       </div>
-      <Card className="p-4 shadow-none border-none rounded-sm">
+      <Card className="shadow-none border-none rounded-sm">
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <div className="flex flex-col sm:flex-row gap-4">

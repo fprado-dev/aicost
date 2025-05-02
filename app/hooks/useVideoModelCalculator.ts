@@ -69,5 +69,6 @@ export function useVideoModelCalculator(tier: ProcessedTier) {
     totalProfitValue,
     totalCost,
     getMostExpensiveModel,
+    videoMarginPercentage: marginPercentage / 100,
   };
 }

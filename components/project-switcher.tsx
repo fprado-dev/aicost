@@ -39,6 +39,7 @@ export function ProjectSwitcher() {
     await onSetUserActive(project.id);
     queryClient.invalidateQueries({ queryKey: ['tiers'] });
     queryClient.invalidateQueries({ queryKey: ['tier-summary'] });
+    queryClient.invalidateQueries({ queryKey: ['defaultModels'] });
   };
 
   const openEditDialog = (project: { id: string; name: string; }) => {

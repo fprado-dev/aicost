@@ -69,5 +69,6 @@ export function useImageModelCalculator(tier: ProcessedTier) {
     totalProfitValue,
     totalCost,
     getMostExpensiveModel,
+    imageMarginPercent: marginPercentage / 100,
   };
 }

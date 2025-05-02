@@ -23,18 +23,27 @@ const OnboardingModal = () => {
 
   const steps = [
     {
-      title: 'Welcome! 👋',
-      content: 'Welcome to AICost! We\'re excited to help you manage and track your AI model costs effectively.',
+      title: 'Welcome to TierWise! 👋',
+      content: 'We\'re thrilled to have you on board! TierWise helps you track, manage, and optimize your AI model costs with precision and clarity.',
     },
     {
-      title: 'Create Your First Project',
-      content: 'Let\'s get started by creating your first project. This will help you organize and monitor your AI models.',
+      title: 'Choose Your AI Models 🤖',
+      content: 'Access our library of 250+ text, image, and video models, including DeepSeek, Claude, Google, and many more. Or easily add your custom models to start tracking right away.',
+    },
+    {
+      title: 'Create Cost Tiers 📊',
+      content: 'Set up customized tiers to categorize your AI usage. This gives you unprecedented transparency into your spending patterns across different models and applications.',
+    },
+    {
+      title: 'Analyze Your Costs 📈',
+      content: 'Visit the Summary section to get comprehensive insights into your AI spending. Identify trends, spot opportunities for optimization, and make data-driven decisions.',
     },
     {
       title: 'You\'re All Set! 🎉',
-      content: 'Congratulations! You\'re ready to start managing your AI costs. Enjoy using AICost!',
+      content: 'Congratulations on setting up TierWise! We\'re committed to helping you manage your AI costs effectively. If you\'re enjoying the experience, we\'d love to hear your feedback!',
     },
   ];
+
 
   const handleNext = async () => {
     if (currentStep < steps.length - 1) {

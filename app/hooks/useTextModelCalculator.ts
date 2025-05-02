@@ -19,16 +19,15 @@ export function useTextModelCalculator(tier: ProcessedTier) {
       }, tier.models[0]);
   };
 
-  const calculateBaseCost = () => {
+  const calculateCosts = () => {
     const textModels = tier.models.filter(model => model.model_type === 'text');
-    if (textModels.length === 0) return 0;
+    if (textModels.length === 0) return { inputCost: 0, outputCost: 0 };
 
-    let baseCost = 0;
     if (useExpensiveModel) {
       const model = getMostExpensiveModel();
       const inputCost = ((model.input_cost_per_million || 0) / 1000000) * inputTokens;
       const outputCost = ((model.output_cost_per_million || 0) / 1000000) * outputTokens;
-      baseCost = inputCost + outputCost;
+      return { inputCost, outputCost };
     } else {
       const sortedModels = textModels.sort((a, b) => {
         const aCost = (a.input_cost_per_million || 0) + (a.output_cost_per_million || 0);
@@ -40,14 +39,16 @@ export function useTextModelCalculator(tier: ProcessedTier) {
         const model = sortedModels[0];
         const inputCost = ((model.input_cost_per_million || 0) / 1000000) * inputTokens;
         const outputCost = ((model.output_cost_per_million || 0) / 1000000) * outputTokens;
-        baseCost = inputCost + outputCost;
+        return { inputCost, outputCost };
       } else {
         const avgInputCost = remainingModels.reduce((sum, model) => sum + (model.input_cost_per_million || 0), 0) / remainingModels.length;
         const avgOutputCost = remainingModels.reduce((sum, model) => sum + (model.output_cost_per_million || 0), 0) / remainingModels.length;
-        baseCost = ((avgInputCost / 1000000) * inputTokens) + ((avgOutputCost / 1000000) * outputTokens);
+        return {
+          inputCost: (avgInputCost / 1000000) * inputTokens,
+          outputCost: (avgOutputCost / 1000000) * outputTokens
+        };
       }
     }
-    return baseCost;
   };
 
   const calculateProfitValue = (baseCost: number) => {
@@ -58,7 +59,8 @@ export function useTextModelCalculator(tier: ProcessedTier) {
     return baseCost + profitValue;
   };
 
-  const totalBaseCost = calculateBaseCost();
+  const { inputCost, outputCost } = calculateCosts();
+  const totalBaseCost = inputCost + outputCost;
   const totalProfitValue = calculateProfitValue(totalBaseCost);
   const totalCost = calculateTotalCost(totalBaseCost, totalProfitValue);
 
@@ -74,10 +76,15 @@ export function useTextModelCalculator(tier: ProcessedTier) {
     setMarginPercentage,
     setUseExpensiveModel,
     // Calculations
+    inputCost,
+    outputCost,
     totalBaseCost,
     totalProfitValue,
     totalCost,
     // Helper functions
     getMostExpensiveModel,
+
+    // Text Margin Percer
+    textMarginPercentage: marginPercentage / 100,
   };
 }
