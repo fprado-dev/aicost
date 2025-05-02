@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 
 import { AppSidebar } from "@/components/app-sidebar";
 import OnboardingModal from "@/components/onboarding-modal";
+import { ProjectSwitcher } from "@/components/project-switcher";
 import {
   SidebarInset,
   SidebarProvider
@@ -44,15 +45,11 @@ export default async function RootLayout({
         >
           <Providers>
             <SidebarProvider>
-              {user?.id && (
-                <>
-                  <AppSidebar user={user} />
-                </>
-              )}
+              {user?.id && <AppSidebar user={user} />}
               <SidebarInset>
                 <div className="flex flex-1 flex-col gap-4">
                   <OnboardingModal />
-
+                  {user?.id && <ProjectSwitcher />}
                   {children}
                 </div>
               </SidebarInset>

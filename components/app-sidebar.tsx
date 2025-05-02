@@ -12,14 +12,12 @@ import * as React from "react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
-  SidebarHeader
+  SidebarFooter
 } from "@/components/ui/sidebar";
 import { User } from "@supabase/supabase-js";
 import { NavMain } from "./nav-main";
 import { NavSecondary } from "./nav-secondary";
 import { NavUser } from "./nav-user";
-import { ProjectSwitcher } from "./project-switcher";
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user: User;
@@ -69,10 +67,8 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
 
 
   return (
-    <Sidebar variant="floating" collapsible="icon"  {...props}>
-      <SidebarHeader>
-        <ProjectSwitcher />
-      </SidebarHeader>
+    <Sidebar collapsible="icon"  {...props}>
+
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
