@@ -59,6 +59,7 @@ export function ProjectSwitcher() {
     setIsCreateDialogOpen(false);
     queryClient.invalidateQueries({ queryKey: ['tiers'] });
     queryClient.invalidateQueries({ queryKey: ['tier-summary'] });
+    queryClient.invalidateQueries({ queryKey: ['defaultModels'] });
   };
 
   const handleEditProject = async () => {

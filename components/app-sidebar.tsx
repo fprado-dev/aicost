@@ -3,7 +3,6 @@
 import {
   BotIcon,
   CrownIcon,
-  FolderIcon,
   GalleryVerticalEndIcon,
   Layers2Icon
 } from "lucide-react";
@@ -29,11 +28,6 @@ const data = {
       title: "Tiers",
       url: "/tiers",
       icon: Layers2Icon,
-    },
-    {
-      title: "Projects",
-      url: "/projects",
-      icon: FolderIcon,
     },
     {
       title: "Models",
