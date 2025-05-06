@@ -151,3 +151,26 @@ export async function removeModelsFromTier({
     throw new Error(`Failed to remove models from tier: ${error.message}`);
   }
 }
+
+export async function updateTierActiveStatus(id: string, isActive: boolean): Promise<void> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const activeProject = await getActiveProject();
+
+  if (isActive) {
+    // First, set all tiers to inactive
+    await supabase.from('tiers')
+      .update({ isActive: false })
+      .eq('user_id', user?.id)
+      .eq('project_id', activeProject?.id);
+  }
+
+  // Then update the specified tier
+  const { error } = await supabase.from('tiers')
+    .update({ isActive: isActive })
+    .eq('id', id)
+    .eq('user_id', user?.id)
+    .eq('project_id', activeProject?.id);
+
+  if (error) throw error;
+}

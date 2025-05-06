@@ -101,6 +101,18 @@ export function useTiers() {
     removeModelFromTierMutation.mutate({ tierId, modelIds });
   };
 
+  const updateTierActiveStatusMutation = useMutation({
+    mutationKey: ['updateTierActiveStatus'],
+    mutationFn: ({ id, isActive }: { id: string; isActive: boolean; }) =>
+      TierServices.updateTierActiveStatus(id, isActive),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: TIERS_QUERY_KEY });
+    },
+  });
+
+  const updateTierActiveStatus = (id: string, isActive: boolean) => {
+    updateTierActiveStatusMutation.mutate({ id, isActive });
+  };
 
   return {
     tiers,
@@ -115,7 +127,9 @@ export function useTiers() {
     updateTier,
     deleteTier,
     isLoading: isLoading,
-    isFetching: isFetching
+    isFetching: isFetching,
+    updateTierActiveStatus,
+    updateTierActiveStatusMutation
   };
 
 }

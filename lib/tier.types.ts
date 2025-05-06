@@ -14,6 +14,7 @@ export type Tier = {
   user_id: string;
   name: string;
   created_at: string;
+  isActive: boolean;
   // Other tier properties
   tiers_models?: TierModelJoin[]; // This matches your query structure
 };
